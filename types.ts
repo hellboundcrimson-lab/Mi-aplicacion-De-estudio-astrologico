@@ -25,23 +25,37 @@ export enum EsotericRay {
   RAY_7 = "Rayo 7: Orden Ceremonial"
 }
 
-// Added missing RayScore interface for chart data representation
+export interface CeremonialSignature {
+  dominantPlanet: string;
+  magicalTitle: string;
+  ceremonialRay: EsotericRay;
+  ritualTool: string;
+  magicalFocus: string;
+  house8Vortex: string;
+  magicalAspects: string[]; // Análisis de aspectos de poder
+}
+
+export interface ProtectorEntity {
+  name: string;
+  order: 'Logia Blanca' | 'Comando Galáctico' | 'Vigilantes Akáshicos';
+  description: string;
+  connectionToUser: string;
+  protectionSeal: string;
+  imageUrl?: string;
+  associatedRay: EsotericRay;
+}
+
 export interface RayScore {
   ray: string | number;
   score: number;
 }
 
-export interface Aspect {
-  p1: string;
-  p2: string;
-  type: 'conjunction' | 'square' | 'opposition' | 'trine' | 'sextile' | string;
-  orb: number;
-}
-
-export interface HierarchyMember {
-  role: string;
+export interface ElohimPresence {
   name: string;
-  energy: string;
+  complement: string;
+  ray: EsotericRay;
+  function: string;
+  stellarEmbassy: string;
   description: string;
   imageUrl?: string;
 }
@@ -51,10 +65,25 @@ export interface PlanetPosition {
   sign: string;
   degree: number;
   house: number;
-  esotericRuler: string;
   exotericRuler: string;
+  esotericRuler: string;
+  hierarchicalRuler: string;
+  mutualRegency: string;
   isSacred: boolean;
   ray: EsotericRay;
+}
+
+export interface Aspect {
+  p1: string;
+  p2: string;
+  type: 'conjunction' | 'square' | 'opposition' | 'trine' | 'sextile';
+  orb: number;
+  esotericEffect?: string;
+}
+
+export interface FixedStarAlignment {
+  starName: string;
+  significance: string;
 }
 
 export interface SpiritualMastery {
@@ -66,15 +95,6 @@ export interface SpiritualMastery {
   soulGroup?: string;
 }
 
-export interface AkashicSentinel {
-  name: string;
-  origin: SoulOrigin;
-  asteroidDominant: string;
-  vowOfProtection: string;
-  description: string;
-  imageUrl?: string;
-}
-
 export interface SoulReading {
   originDistribution: Array<{ name: string; value: number }>;
   rayProfile: RayProfile;
@@ -82,46 +102,47 @@ export interface SoulReading {
   geocentricPoints: PlanetPosition[];
   esotericBodies: any[];
   pastLifeAsteroids: PlanetPosition[];
-  fixedStarAlignments: any[];
-  aspects: Aspect[];
   spiritualMastery: SpiritualMastery;
   hierarchy: {
-    monad: HierarchyMember;
-    solarAngel: HierarchyMember;
-    chohan: HierarchyMember;
-    archangel: HierarchyMember;
+    monad: any;
+    solarAngel: any;
+    chohan: any;
+    archangel: any;
   };
-  sentinel: AkashicSentinel;
-  astralEntity: {
-    type: string;
-    vibration: string;
-    astralOrigin: string;
-    entityDescription: string;
-  };
-  historicalEcho: {
-    name: string;
-    similarity: number;
-    sharedTraits: string[];
-    era: string;
-  };
+  elohim: ElohimPresence;
+  sentinel: any;
+  astralEntity: any;
+  historicalEcho: any;
+  protectorEntity: ProtectorEntity; // Cambiado de OccultEntity a ProtectorEntity
+  ceremonialSignature: CeremonialSignature;
   ufologicalAnalysis: {
     dnaResonance: string;
     contactType: string;
     ufologyNote: string;
     guardianName: string;
     guardianRank: string;
+    elohimVibration: string;
+    southernHemisphereAlignment: string;
   };
   masterImageUrl?: string;
   entityImageUrl?: string;
   solarAngelImageUrl?: string;
   monadImageUrl?: string;
+  sentinelImageUrl?: string;
+  elohimImageUrl?: string;
+  protectorImageUrl?: string;
   angles: {
     asc: number;
     ascSign: string;
     mc: number;
     ic: number;
     dc: number;
+    mcSign: string;
+    icSign: string;
+    dcSign: string;
   };
+  fixedStarAlignments: FixedStarAlignment[];
+  aspects: Aspect[];
 }
 
 export interface RayProfile {
@@ -144,4 +165,6 @@ export interface BirthData {
   time: string;
   city: string;
   country: string;
+  lat?: string;
+  lon?: string;
 }

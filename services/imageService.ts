@@ -23,19 +23,25 @@ export const generateEsotericImage = async (prompt: string): Promise<string> => 
   }
 };
 
+export const getProtectorPrompt = (name: string, order: string, seal: string) => 
+  `Divine and radiant portrait of the Protector Entity ${name} from the ${order}. 
+   A being of pure celestial light, eyes like golden stars, wearing robes of energy. 
+   Holding the ${seal}. Background is a temple of light in space. Cinematic, 8k, spiritual realism.`;
+
 export const getMasterPrompt = (name: string, ray: string) => 
-  `Divine and majestic portrait of Ascended Master ${name}. Glowing with ${ray} energy. Sacred geometry, spiritual aura, mystical art, 8k.`;
+  `Ascended Master ${name} in a halo of ${ray} energy. 8k, mystical.`;
 
-export const getEntityPrompt = (origin: string, dna: string) => 
-  `Advanced extraterrestrial guardian from ${origin}. Benevolent and wise, glowing skin, large expressive eyes, cinematic ufology style, 8k.`;
-
-export const getSolarAngelPrompt = (ray: string) => 
-  `A magnificent Solar Angel (Angel Solar), a being of pure golden and white light. Radiant, ethereal, cinematic lighting.`;
-
-export const getMonadPrompt = (degree: number) => 
-  `Abstract representation of the Monad (Divine Spark). A central point of infinite light radiating sacred geometric patterns, central sun aesthetic.`;
+export const getElohimPrompt = (name: string, function_name: string, embassy: string) => 
+  `Cosmic manifestation of Elohim ${name}. 8k, majestic.`;
 
 export const getSentinelPrompt = (name: string, origin: string, asteroid: string) => 
-  `A powerful Akashic Sentinel named ${name} from ${origin}. The entity embodies the energy of the asteroid ${asteroid}. 
-   Armor made of starlight, eyes containing galaxies, holding a staff of crystal light. 
-   Akashic Records background with cosmic nebulae, hyper-detailed, spiritual realism, cinematic 8k, ethereal glow.`;
+  `Akashic Guardian ${name} from ${origin}. 8k.`;
+
+export const getEntityPrompt = (origin: string, dna: string) => 
+  `Galactic guardian from ${origin}. 8k.`;
+
+export const getSolarAngelPrompt = (ray: string) => 
+  `Magnificent Solar Angel of pure white light. 8k.`;
+
+export const getMonadPrompt = (degree: number) => 
+  `Sacred geometry point of light. 8k.`;
