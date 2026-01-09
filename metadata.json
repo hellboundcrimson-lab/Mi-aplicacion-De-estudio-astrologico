@@ -1,0 +1,7 @@
+{
+  "name": "SoulOrigin: Akashic Starseed Oracle",
+  "description": "An esoteric astrology application based on Alice Bailey's methods and Starseed origins to identify soul lineage and Akashic records through birth chart analysis.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
