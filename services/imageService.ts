@@ -23,25 +23,13 @@ export const generateEsotericImage = async (prompt: string): Promise<string> => 
   }
 };
 
+export const getShipPrompt = (name: string, fleet: string) => 
+  `Cinematic shot from space of the Mothership ${name} from the ${fleet}. 
+   Bioluminescent surfaces, crystalline structure, orbiting a blue star. 
+   High tech, ethereal, 8k resolution, cosmic photography.`;
+
 export const getProtectorPrompt = (name: string, order: string, seal: string) => 
-  `Divine and radiant portrait of the Protector Entity ${name} from the ${order}. 
-   A being of pure celestial light, eyes like golden stars, wearing robes of energy. 
-   Holding the ${seal}. Background is a temple of light in space. Cinematic, 8k, spiritual realism.`;
+  `Divine and radiant portrait of the Protector Entity ${name}. Cinematic, 8k.`;
 
 export const getMasterPrompt = (name: string, ray: string) => 
   `Ascended Master ${name} in a halo of ${ray} energy. 8k, mystical.`;
-
-export const getElohimPrompt = (name: string, function_name: string, embassy: string) => 
-  `Cosmic manifestation of Elohim ${name}. 8k, majestic.`;
-
-export const getSentinelPrompt = (name: string, origin: string, asteroid: string) => 
-  `Akashic Guardian ${name} from ${origin}. 8k.`;
-
-export const getEntityPrompt = (origin: string, dna: string) => 
-  `Galactic guardian from ${origin}. 8k.`;
-
-export const getSolarAngelPrompt = (ray: string) => 
-  `Magnificent Solar Angel of pure white light. 8k.`;
-
-export const getMonadPrompt = (degree: number) => 
-  `Sacred geometry point of light. 8k.`;

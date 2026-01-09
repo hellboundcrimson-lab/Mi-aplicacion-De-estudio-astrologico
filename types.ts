@@ -6,13 +6,9 @@ export enum SoulOrigin {
   LYRA = "Lyra",
   ORION = "Orión",
   ANDROMEDA = "Andrómeda",
-  MINTAKA = "Mintaka",
+  MINTAKA = "Míntaka",
   VEGA = "Vega",
-  ALPHA_CENTAURI = "Alfa Centauri",
-  ANTARES = "Antares",
-  EARTH_NATIVE = "Nativo de la Tierra",
-  GALACTIC_CENTER = "Centro Galáctico",
-  CANOPUS = "Canopus"
+  EARTH_NATIVE = "Nativo de la Tierra"
 }
 
 export enum EsotericRay {
@@ -25,24 +21,43 @@ export enum EsotericRay {
   RAY_7 = "Rayo 7: Orden Ceremonial"
 }
 
-export interface CeremonialSignature {
-  dominantPlanet: string;
-  magicalTitle: string;
-  ceremonialRay: EsotericRay;
-  ritualTool: string;
-  magicalFocus: string;
-  house8Vortex: string;
-  magicalAspects: string[]; // Análisis de aspectos de poder
+export interface GalacticRace {
+  name: string;
+  origin: SoulOrigin;
+  traits: string[];
+  mission: string;
+  frequency: string;
+  stellarGate: string;
+  description: string;
 }
 
-export interface ProtectorEntity {
-  name: string;
-  order: 'Logia Blanca' | 'Comando Galáctico' | 'Vigilantes Akáshicos';
+export interface UfologicalAlignment {
+  stationName: string;
+  fleet: string;
+  proximity: number;
+  contactType: 'Físico' | 'Telepático' | 'Onírico' | 'Multidimensional';
   description: string;
-  connectionToUser: string;
-  protectionSeal: string;
-  imageUrl?: string;
-  associatedRay: EsotericRay;
+  shipImageUrl?: string;
+}
+
+export interface AstralGuardian {
+  name: string;
+  type: string;
+  power: string;
+  sigil: string;
+  element: 'Fuego' | 'Tierra' | 'Aire' | 'Agua';
+}
+
+export interface AnubisProtection {
+  house: number;
+  sign: string;
+  isAtMC: boolean;
+  aspectToElMorya: string;
+  protectionLevel: number;
+  astralStatus: string;
+  moryaDecree: string;
+  vulnerabilityNote: string;
+  guardians: AstralGuardian[];
 }
 
 export interface RayScore {
@@ -50,14 +65,32 @@ export interface RayScore {
   score: number;
 }
 
-export interface ElohimPresence {
+export interface SpiritualMastery {
+  soulRay: EsotericRay;
+  masterName: string;
+  masterQualities: string[];
+  ashramWork: string;
+  mahaChohanAdvice: string;
+  soulGroup?: string;
+}
+
+export interface CeremonialSignature {
+  dominantPlanet: string;
+  magicalTitle: string;
+  ceremonialRay: EsotericRay;
+  ritualTool: string;
+  magicalFocus: string;
+  house8Vortex: string;
+  magicalAspects: string[];
+}
+
+export interface ProtectorEntity {
   name: string;
-  complement: string;
-  ray: EsotericRay;
-  function: string;
-  stellarEmbassy: string;
+  order: 'Logia Blanca' | 'Comando Galáctico' | 'Vigilantes Akáshicos';
   description: string;
+  protectionSeal: string;
   imageUrl?: string;
+  associatedRay: EsotericRay;
 }
 
 export interface PlanetPosition {
@@ -81,27 +114,21 @@ export interface Aspect {
   esotericEffect?: string;
 }
 
-export interface FixedStarAlignment {
-  starName: string;
-  significance: string;
-}
-
-export interface SpiritualMastery {
-  soulRay: EsotericRay;
-  masterName: string;
-  masterQualities: string[];
-  ashramWork: string;
-  mahaChohanAdvice: string;
-  soulGroup?: string;
-}
-
 export interface SoulReading {
-  originDistribution: Array<{ name: string; value: number }>;
-  rayProfile: RayProfile;
+  rayProfile: {
+    soul: EsotericRay;
+    personality: EsotericRay;
+    mentalBody: EsotericRay;
+    astralBody: EsotericRay;
+    physicalBody: EsotericRay;
+    mahaChohanSynthesis: EsotericRay;
+  };
+  starseedOrigin: GalacticRace;
   akashicInsight: string;
   geocentricPoints: PlanetPosition[];
-  esotericBodies: any[];
   pastLifeAsteroids: PlanetPosition[];
+  anubisProtection: AnubisProtection;
+  ufologicalReport: UfologicalAlignment[];
   spiritualMastery: SpiritualMastery;
   hierarchy: {
     monad: any;
@@ -109,28 +136,9 @@ export interface SoulReading {
     chohan: any;
     archangel: any;
   };
-  elohim: ElohimPresence;
-  sentinel: any;
-  astralEntity: any;
-  historicalEcho: any;
-  protectorEntity: ProtectorEntity; // Cambiado de OccultEntity a ProtectorEntity
+  elohim: any;
+  protectorEntity: ProtectorEntity;
   ceremonialSignature: CeremonialSignature;
-  ufologicalAnalysis: {
-    dnaResonance: string;
-    contactType: string;
-    ufologyNote: string;
-    guardianName: string;
-    guardianRank: string;
-    elohimVibration: string;
-    southernHemisphereAlignment: string;
-  };
-  masterImageUrl?: string;
-  entityImageUrl?: string;
-  solarAngelImageUrl?: string;
-  monadImageUrl?: string;
-  sentinelImageUrl?: string;
-  elohimImageUrl?: string;
-  protectorImageUrl?: string;
   angles: {
     asc: number;
     ascSign: string;
@@ -141,22 +149,10 @@ export interface SoulReading {
     icSign: string;
     dcSign: string;
   };
-  fixedStarAlignments: FixedStarAlignment[];
+  fixedStarAlignments: any[];
   aspects: Aspect[];
-}
-
-export interface RayProfile {
-  soul: EsotericRay;
-  personality: EsotericRay;
-  mentalBody: EsotericRay;
-  astralBody: EsotericRay;
-  physicalBody: EsotericRay;
-  mahaChohanSynthesis: EsotericRay;
-  distributions: {
-    sacred: RayScore[];
-    nonSacred: RayScore[];
-    total: RayScore[];
-  };
+  masterImageUrl?: string;
+  protectorImageUrl?: string;
 }
 
 export interface BirthData {

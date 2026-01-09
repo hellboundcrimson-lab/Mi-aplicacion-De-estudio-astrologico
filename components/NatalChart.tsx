@@ -33,7 +33,7 @@ const NatalChart: React.FC<Props> = ({ points, angles, aspects = [], title, rota
 
   return (
     <div className="flex flex-col items-center glass-panel p-8 rounded-[3rem] border-white/10 shadow-2xl relative">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(168,85,247,0.05)_0%,_transparent_70%)] pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(6,182,212,0.05)_0%,_transparent_70%)] pointer-events-none"></div>
       
       <h3 className="cinzel text-xl text-white mb-6 font-bold tracking-[0.3em] uppercase text-center">
         {title}
@@ -46,6 +46,10 @@ const NatalChart: React.FC<Props> = ({ points, angles, aspects = [], title, rota
               <feGaussianBlur stdDeviation="3" result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
+            <radialGradient id="astreaGradient">
+              <stop offset="0%" stopColor="#06b6d4" />
+              <stop offset="100%" stopColor="#3b82f6" />
+            </radialGradient>
           </defs>
 
           {/* Zodiac Ring */}
@@ -71,7 +75,7 @@ const NatalChart: React.FC<Props> = ({ points, angles, aspects = [], title, rota
                   fontSize="10"
                   textAnchor="middle"
                   alignmentBaseline="middle"
-                  className="opacity-60 cinzel font-bold"
+                  className="opacity-40 cinzel font-bold"
                   transform={`rotate(${midDeg - 180 + rotation}, ${getPos(midDeg, radius + 20).x}, ${getPos(midDeg, radius + 20).y})`}
                 >
                   {sign[0]}
@@ -80,52 +84,31 @@ const NatalChart: React.FC<Props> = ({ points, angles, aspects = [], title, rota
             );
           })}
 
-          {/* Aspect Lines */}
-          <g className="opacity-40">
-            {aspects.map((asp, idx) => {
-              const pos1 = getPos(getPlanetAngle(asp.p1), radius - 60);
-              const pos2 = getPos(getPlanetAngle(asp.p2), radius - 60);
-              let color = "#3b82f6"; // Armoniosos
-              if (asp.type === 'square' || asp.type === 'opposition') color = "#ef4444"; // Tension
-              if (asp.type === 'conjunction') color = "#f59e0b";
-
-              return (
-                <line 
-                  key={idx}
-                  x1={pos1.x} y1={pos1.y} 
-                  x2={pos2.x} y2={pos2.y} 
-                  stroke={color} 
-                  strokeWidth={asp.type === 'trine' ? "2" : "1"}
-                  strokeDasharray={asp.type === 'square' ? "4 4" : "none"}
-                />
-              );
-            })}
-          </g>
-
-          {/* Main Axes */}
-          <g filter="url(#glow)">
-            <line 
-              x1={getPos(angles.asc, radius + 20).x} y1={getPos(angles.asc, radius + 20).y} 
-              x2={getPos(angles.dc, radius + 20).x} y2={getPos(angles.dc, radius + 20).y} 
-              stroke="#a855f7" strokeWidth="2" 
-            />
-            <line 
-              x1={getPos(angles.mc, radius + 20).x} y1={getPos(angles.mc, radius + 20).y} 
-              x2={getPos(angles.ic, radius + 20).x} y2={getPos(angles.ic, radius + 20).y} 
-              stroke="#ec4899" strokeWidth="1" strokeOpacity="0.5"
-            />
-          </g>
-
           {/* Planet Points */}
           {points.map((p, i) => {
             const angle = ZODIAC_SIGNS.indexOf(p.sign) * 30 + p.degree;
             const dist = radius - 60;
             const pos = getPos(angle, dist);
             
+            const isSpecial = p.name === "Astrea" || p.name === "DNA";
+            
             return (
               <g key={i} className="group cursor-help">
-                <circle cx={pos.x} cy={pos.y} r="6" fill={p.isSacred ? "#f59e0b" : "white"} className="transition-all group-hover:r-8" />
-                <text x={pos.x} y={pos.y - 12} fill="white" fontSize="9" textAnchor="middle" className="hidden group-hover:block font-bold">
+                {isSpecial && (
+                  <circle 
+                    cx={pos.x} cy={pos.y} r="14" 
+                    fill="url(#astreaGradient)" 
+                    className="animate-pulse opacity-20"
+                  />
+                )}
+                <circle 
+                  cx={pos.x} cy={pos.y} 
+                  r={isSpecial ? "8" : "6"} 
+                  fill={p.name === "Astrea" ? "#06b6d4" : p.name === "DNA" ? "#a855f7" : p.isSacred ? "#f59e0b" : "white"} 
+                  className="transition-all group-hover:r-10" 
+                  filter={isSpecial ? "url(#glow)" : ""}
+                />
+                <text x={pos.x} y={pos.y - 18} fill="white" fontSize="9" textAnchor="middle" className="hidden group-hover:block font-black uppercase tracking-tighter shadow-black drop-shadow-md">
                   {p.name}
                 </text>
               </g>
@@ -134,6 +117,11 @@ const NatalChart: React.FC<Props> = ({ points, angles, aspects = [], title, rota
           
           <circle cx={center} cy={center} r="4" fill="white" className="opacity-20" />
         </svg>
+      </div>
+      <div className="mt-4 flex gap-6 text-[9px] font-black uppercase tracking-widest text-cyan-500/60">
+         <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-cyan-400"></div> Astrea</div>
+         <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-purple-500"></div> DNA</div>
+         <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-orange-400"></div> Sagrado</div>
       </div>
     </div>
   );
